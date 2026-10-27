@@ -1,0 +1,10 @@
+CREATE TABLE enterprises(
+	id_enterprise BINARY(16) UNIQUE NOT NULL,
+	legal_name VARCHAR(255) NOT NULL,
+	cnpj VARCHAR(14) NOT NULL UNIQUE,
+	cep VARCHAR(8) UNIQUE NOT NULL
+	city VARCHAR(255) NOT NULL,
+	state CHAR(2) NOT NULL,
+	
+	PRIMARY KEY(id_enterprise)
+);
