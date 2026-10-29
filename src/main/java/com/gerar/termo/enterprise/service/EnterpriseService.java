@@ -78,6 +78,5 @@ public class EnterpriseService {
 		EditEnterpriseResponseDTO response = enterpriseMapper.toEditEnterpriseResponseDTO(enterprise);
 		
 		return response;
-		
 	}
 }
