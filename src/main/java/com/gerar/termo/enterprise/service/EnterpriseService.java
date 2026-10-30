@@ -2,12 +2,15 @@ package com.gerar.termo.enterprise.service;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.gerar.termo.enterprise.dto.request.CreateEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.request.EditEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.response.CreateEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.EditEnterpriseResponseDTO;
+import com.gerar.termo.enterprise.dto.response.ListEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.exception.CompanyAlreadyRegistered;
 import com.gerar.termo.enterprise.exception.EnterpriseNotFoundException;
 import com.gerar.termo.enterprise.mapper.EnterpriseMapper;
@@ -76,6 +79,14 @@ public class EnterpriseService {
 		enterpriseRepository.save(enterprise);
 		
 		EditEnterpriseResponseDTO response = enterpriseMapper.toEditEnterpriseResponseDTO(enterprise);
+		
+		return response;
+	}
+	
+	public Page<ListEnterpriseResponseDTO> listEnterprise(Pageable pageable) {
+		Page<Enterprise> enterprises = enterpriseRepository.findAll(pageable);
+		
+		Page<ListEnterpriseResponseDTO> response = enterprises.map(enterpriseMapper::toListEnterpriseResponseDTO);
 		
 		return response;
 	}

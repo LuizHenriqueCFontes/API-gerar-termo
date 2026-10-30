@@ -1,5 +1,7 @@
 package com.gerar.termo.enterprise.dto.response;
 
-public record EditEnterpriseResponseDTO(String legalName, String cnpj, String cep, String city, String state) {
+import java.util.UUID;
+
+public record EditEnterpriseResponseDTO(UUID idEnterprise, String legalName, String cnpj, String cep, String city, String state) {
 
 }
