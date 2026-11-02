@@ -2,8 +2,12 @@ package com.gerar.termo.enterprise.controller;
 
 import java.util.UUID;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,7 +18,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.gerar.termo.enterprise.dto.request.CreateEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.request.EditEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.response.CreateEnterpriseResponseDTO;
+import com.gerar.termo.enterprise.dto.response.DetailsEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.EditEnterpriseResponseDTO;
+import com.gerar.termo.enterprise.dto.response.ListEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.service.EnterpriseService;
 
 import jakarta.validation.Valid;
@@ -41,6 +47,29 @@ public class EnterpriseController {
 		EditEnterpriseResponseDTO response = enterpriseService.editEnterprise(idEnterprise, request);
 		
 		return ResponseEntity.ok(response);
+	}
+	
+	@GetMapping
+	public ResponseEntity<Page<ListEnterpriseResponseDTO>> listEnterprise(Pageable pageable) {
+		Page<ListEnterpriseResponseDTO> response = enterpriseService.listEnterprise(pageable);
+		
+		return ResponseEntity.ok(response);
+		
+	}
+	
+	@GetMapping("/{idEnterprise}")
+	public ResponseEntity<DetailsEnterpriseResponseDTO> enterpriseDetails(@PathVariable UUID idEnterprise) {
+		DetailsEnterpriseResponseDTO response = enterpriseService.detailsEnterprise(idEnterprise);
+		
+		return ResponseEntity.ok(response);
+		
+	}
+	
+	@DeleteMapping("/{idEnterprise}")
+	public ResponseEntity<Void> deleteEnterprise(@PathVariable UUID idEnterprise) {
+		enterpriseService.deleteEnterprise(idEnterprise);
+		
+		return ResponseEntity.noContent().build();
 	}
 
 }

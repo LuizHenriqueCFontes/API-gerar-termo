@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.gerar.termo.enterprise.dto.request.CreateEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.request.EditEnterpriseRequestDTO;
 import com.gerar.termo.enterprise.dto.response.CreateEnterpriseResponseDTO;
+import com.gerar.termo.enterprise.dto.response.DetailsEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.EditEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.ListEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.exception.CompanyAlreadyRegistered;
@@ -89,5 +90,20 @@ public class EnterpriseService {
 		Page<ListEnterpriseResponseDTO> response = enterprises.map(enterpriseMapper::toListEnterpriseResponseDTO);
 		
 		return response;
+	}
+	
+	public DetailsEnterpriseResponseDTO detailsEnterprise(UUID idEnterprise) {
+		Enterprise enterprise = enterpriseRepository.findById(idEnterprise)
+										.orElseThrow(() -> new EnterpriseNotFoundException("Empresa não encontrada"));
+		
+		DetailsEnterpriseResponseDTO response = enterpriseMapper.toDetailsEnterpriseResponseDTO(enterprise);
+		
+		return response;
+		
+	}
+	
+	@Transactional
+	public void deleteEnterprise(UUID idEnterprise) {
+		enterpriseRepository.deleteById(idEnterprise);
 	}
 }
