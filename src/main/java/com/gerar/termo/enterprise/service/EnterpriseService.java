@@ -77,6 +77,10 @@ public class EnterpriseService {
 			enterprise.setState(request.state());
 		}
 		
+		if(request.address() != null && !request.address().isBlank()) {
+			enterprise.setAddress(request.address());
+		}
+		
 		enterpriseRepository.save(enterprise);
 		
 		EditEnterpriseResponseDTO response = enterpriseMapper.toEditEnterpriseResponseDTO(enterprise);

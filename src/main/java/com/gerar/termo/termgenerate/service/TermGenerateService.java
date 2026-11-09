@@ -2,7 +2,11 @@ package com.gerar.termo.termgenerate.service;
 
 import org.springframework.stereotype.Service;
 
+import com.gerar.termo.enterprise.exception.EnterpriseNotFoundException;
+import com.gerar.termo.enterprise.model.Enterprise;
 import com.gerar.termo.enterprise.repository.EnterpriseRepository;
+import com.gerar.termo.termgenerate.dto.GenerateTermRequestDTO;
+import com.gerar.termo.termgenerate.dto.TermDocumentDataDTO;
 
 @Service
 public class TermGenerateService {
@@ -11,6 +15,14 @@ public class TermGenerateService {
 	
 	public TermGenerateService(EnterpriseRepository enterpriseRepository) {
 		this.enterpriseRepository = enterpriseRepository;
+	}
+	
+	public byte[] generateTerm(GenerateTermRequestDTO request) {
+		Enterprise enterprise = enterpriseRepository.findById(request.idEnterprise())
+											.orElseThrow(() -> new EnterpriseNotFoundException("Empresa não encontrada"));
+		
+		TermDocumentDataDTO data(request.employe().name(), request.employe().cpf(), request.employe().address(),);
+		
 	}
  
 }

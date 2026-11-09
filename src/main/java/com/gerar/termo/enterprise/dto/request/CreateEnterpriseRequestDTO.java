@@ -11,6 +11,9 @@ public record CreateEnterpriseRequestDTO(
 		String cnpj, 
 		
 		@NotBlank
+		String address,
+		
+		@NotBlank
 		String cep, 
 		
 		@NotBlank

@@ -27,6 +27,9 @@ public class Enterprise {
 	private String cnpj;
 	
 	@Column(nullable = false)
+	private String address;
+	
+	@Column(nullable = false)
 	private String cep;
 	
 	@Column(nullable = false)
