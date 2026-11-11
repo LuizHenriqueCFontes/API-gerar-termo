@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import org.springframework.stereotype.Service;
 
+import com.gerar.termo.documentgenerate.service.DocumentGenerateService;
 import com.gerar.termo.enterprise.exception.EnterpriseNotFoundException;
 import com.gerar.termo.enterprise.model.Enterprise;
 import com.gerar.termo.enterprise.repository.EnterpriseRepository;
@@ -14,9 +15,11 @@ import com.gerar.termo.termgenerate.dto.TermDocumentDataDTO;
 public class TermGenerateService {
 	
 	private final EnterpriseRepository enterpriseRepository;
+	private final DocumentGenerateService documentGenerateService;
 	
-	public TermGenerateService(EnterpriseRepository enterpriseRepository) {
+	public TermGenerateService(EnterpriseRepository enterpriseRepository, DocumentGenerateService documentGenerateService) {
 		this.enterpriseRepository = enterpriseRepository;
+		this.documentGenerateService = documentGenerateService;
 	}
 	
 	public byte[] generateTerm(GenerateTermRequestDTO request) {
@@ -29,6 +32,9 @@ public class TermGenerateService {
 				enterprise.getState(), request.equipment().notebookModel(), 
 				request.equipment().notebookCharger(), LocalDate.now());
 		
+		byte[] document = documentGenerateService.generateDocument(data);
+		
+		return document;
 	}
  
 }
