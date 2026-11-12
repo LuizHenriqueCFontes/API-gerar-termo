@@ -40,6 +40,7 @@ public class EnterpriseService {
 		
 		enterprise.setLegalName(request.legalName());
 		enterprise.setCnpj(request.cnpj());
+		enterprise.setAddress(request.address());
 		enterprise.setCep(request.cep());
 		enterprise.setCity(request.city());
 		enterprise.setState(request.state());

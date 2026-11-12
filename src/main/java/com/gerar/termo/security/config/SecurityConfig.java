@@ -19,6 +19,8 @@ public class SecurityConfig {
 										.requestMatchers(HttpMethod.GET, "/api/enterprise").permitAll()
 										.requestMatchers(HttpMethod.GET, "/api/enterprise/*").permitAll()
 										.requestMatchers(HttpMethod.DELETE, "/api/enterprise/*").permitAll()
+										
+										.requestMatchers(HttpMethod.POST, "/api/terms/generate").permitAll()
 										.anyRequest().authenticated());
 		
 		return http.build();
