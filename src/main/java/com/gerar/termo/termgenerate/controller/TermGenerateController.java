@@ -3,6 +3,7 @@ package com.gerar.termo.termgenerate.controller;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,6 +21,7 @@ public class TermGenerateController {
 		this.termGenerateService = termGenerateService;
 	}
 	
+	@PostMapping("/generate")
 	public ResponseEntity<byte[]> generateTerm(@RequestBody GenerateTermRequestDTO request) {
 		
 		byte[] document = termGenerateService.generateTerm(request);
