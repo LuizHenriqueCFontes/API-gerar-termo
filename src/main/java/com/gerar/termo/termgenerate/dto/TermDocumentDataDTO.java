@@ -1,6 +1,5 @@
 package com.gerar.termo.termgenerate.dto;
 
-import java.time.LocalDate;
 
 public record TermDocumentDataDTO(
 		String employeName,
@@ -17,7 +16,7 @@ public record TermDocumentDataDTO(
 	    String notebookModel,
 	    String notebookCharger,
 
-	    LocalDate generationDate
+	    String generationDate
 		
 		
 		) {

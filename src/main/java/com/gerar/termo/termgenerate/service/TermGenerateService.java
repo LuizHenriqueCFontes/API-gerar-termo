@@ -1,6 +1,7 @@
 package com.gerar.termo.termgenerate.service;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.stereotype.Service;
 
@@ -26,11 +27,13 @@ public class TermGenerateService {
 		Enterprise enterprise = enterpriseRepository.findById(request.idEnterprise())
 											.orElseThrow(() -> new EnterpriseNotFoundException("Empresa não encontrada"));
 		
+		String generationDate = LocalDate.now().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+		
 		TermDocumentDataDTO data = new TermDocumentDataDTO(request.employe().name(), request.employe().cpf(), 
-				request.employe().address(), enterprise.getLegalName(), enterprise.getAddress(), 
-				enterprise.getCnpj(), enterprise.getCep(), enterprise.getCity(), 
+				request.employe().address(), enterprise.getLegalName(), enterprise.getCnpj(), 
+				enterprise.getAddress(), enterprise.getCep(), enterprise.getCity(), 
 				enterprise.getState(), request.equipment().notebookModel(), 
-				request.equipment().notebookCharger(), LocalDate.now());
+				request.equipment().notebookCharger(), generationDate);
 		
 		byte[] document = documentGenerateService.generateDocument(data);
 		
