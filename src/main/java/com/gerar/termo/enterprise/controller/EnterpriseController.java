@@ -1,5 +1,6 @@
 package com.gerar.termo.enterprise.controller;
 
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.data.domain.Page;
@@ -21,6 +22,7 @@ import com.gerar.termo.enterprise.dto.response.CreateEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.DetailsEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.EditEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.dto.response.ListEnterpriseResponseDTO;
+import com.gerar.termo.enterprise.dto.response.PageListEnterpriseResponseDTO;
 import com.gerar.termo.enterprise.service.EnterpriseService;
 
 import jakarta.validation.Valid;
@@ -49,12 +51,19 @@ public class EnterpriseController {
 		return ResponseEntity.ok(response);
 	}
 	
-	@GetMapping
-	public ResponseEntity<Page<ListEnterpriseResponseDTO>> listEnterprise(Pageable pageable) {
-		Page<ListEnterpriseResponseDTO> response = enterpriseService.listEnterprise(pageable);
+	@GetMapping("/page")
+	public ResponseEntity<Page<PageListEnterpriseResponseDTO>> pageListEnterprise(Pageable pageable) {
+		Page<PageListEnterpriseResponseDTO> response = enterpriseService.pageListEnterprise(pageable);
 		
 		return ResponseEntity.ok(response);
 		
+	}
+	
+	@GetMapping("/list")
+	public ResponseEntity<List<ListEnterpriseResponseDTO>> listEnterpriseResponseDTO() {
+		List<ListEnterpriseResponseDTO> response = enterpriseService.listEnterprise();
+		
+		return ResponseEntity.ok(response);
 	}
 	
 	@GetMapping("/{idEnterprise}")
